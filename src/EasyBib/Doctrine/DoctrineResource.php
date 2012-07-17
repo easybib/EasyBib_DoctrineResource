@@ -45,7 +45,7 @@
  * @link     https://github.com/easybib/EasyBib_Form_Decorator
  */
 
-namespace EasyBib;
+namespace EasyBib\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\EventManager;
