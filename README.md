@@ -22,15 +22,23 @@ Usage
     - tree: enables Gedmo Tree nested behavior for Doctrine entities
         see: https://github.com/l3pp4rd/DoctrineExtensions/blob/master/doc/tree.md
     - profile: enables debugging of all Doctrine SQL queries (they get echoed)
+ 
  3. Initialize DoctrineResource by:
-    $doctrineResource = new \EasyBib\DoctrineResource(
-        $doctrineIniConfig, // your doctrine.ini settings
-        $root,              // path to your app root folder
-        'default',          // the zf mvc module name you want to use the DoctrineResource from
-        $options            // the options array for loading needed PlugIns
-    );
+ 
+        $doctrineResource =  new \EasyBib\Doctrine\DoctrineResource(				 			
+          $doctrineIniConfig, // your doctrine.ini settings
+       	  $root,              // path to your app root folder
+          'default',          // zf mvc module name you want to use the DoctrineResource from
+       	  $options            // the options array for loading needed PlugIns 
+       	 );
  4. Use the Doctrine EntityManager: 
-     - $em = $doctrineResource->getEntityManager(); _or_
-     - $em = \Zend_Registry::get('em'); (its getting registered by DoctrineResource)
+         
+        $em = $doctrineResource->getEntityManager(); 
+        
+       _or_
+              
+        $em = \Zend_Registry::get('em'); 
+        
+      (its getting registered by DoctrineResource)
  5. Have fun with Doctrine!
       
