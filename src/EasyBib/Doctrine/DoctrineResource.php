@@ -188,9 +188,20 @@ class DoctrineResource
         $proxyFolder  = $this->getProxyFolder();
         $driverImpl   = $config->newDefaultAnnotationDriver($modelFolders);
 
+        $annotationReader = new \Doctrine\Common\Annotations\AnnotationReader;
+        $cachedAnnotationReader = new \Doctrine\Common\Annotations\CachedReader(
+            $annotationReader, // use reader
+            $cache // and a cache driver
+        );
+
+        $annotationDriver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
+            $cachedAnnotationReader, // our cached annotation reader
+            array($modelFolders) // paths to look in
+        );
+
         $this->registerAutoloadNamespaces();
 
-        $config->setMetadataDriverImpl($driverImpl);
+        $config->setMetadataDriverImpl($annotationDriver);
         $config->setMetadataCacheImpl($cache);
         $config->setQueryCacheImpl($cache);
         $config->setProxyDir($proxyFolder);
@@ -252,9 +263,11 @@ class DoctrineResource
         $folders = array(
             $this->rootPath . '/library/Doctrine/Model'
         );
+
         if (is_dir($this->modulePath . '/' . $this->config->modelFolder)) {
             $folders[] = $this->modulePath . '/' . $this->config->modelFolder;
         }
+
         return $folders;
     }
 
@@ -283,8 +296,7 @@ class DoctrineResource
     {
         AnnotationRegistry::registerAutoloadNamespace(
             'Gedmo\Mapping\Annotation',
-            $this->rootPath . '/vendor'
-        //,$this->modulePath . '/library'
+            $this->rootPath . '/vendor/gedmo/doctrine-extensions/lib'
         );
     }
 
