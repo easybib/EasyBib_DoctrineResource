@@ -117,9 +117,43 @@ class DoctrineResource
         $this->rootPath   = $rootPath;
         $this->module     = $module;
         $this->modulePath = $rootPath . '/app/modules/' . $module;
-        $this->options    = $options;
+
+        $this->setOptions($options);
 
         $this->init();
+    }
+
+    /**
+     * Set options and validate input a little.
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $defaultOptions = array(
+            'timestampable' => false,
+            'sluggable'     => false,
+            'tree'          => false,
+            'profile'       => false
+        );
+
+        if (count($options) > 0) {
+            foreach ($options as $option => $value) {
+                if (false === array_key_exists($option, $defaultOptions)) {
+                    throw new \InvalidArgumentException("We currently do not support: {$option}.");
+                }
+                if (false === is_bool($value)) {
+                    throw new \InvalidArgumentException("Value for '{$option}' must be 'true' or 'false'.");
+                }
+                $defaultOptions[$option] = $value;
+            }
+        }
+
+        $this->options = $defaultOptions;
+
+        return $this;
     }
 
     /**
