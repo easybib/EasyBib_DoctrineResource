@@ -105,14 +105,18 @@ class DoctrineResource
      *
      * @return $this
      */
-    public function __construct(\Zend_Config_Ini $config, $rootPath, $module, array $options)
+    public function __construct($config, $rootPath, $module, array $options)
     {
-        if (!is_string($rootPath)) {
+        if (!($config instanceof \Zend_Config_Ini) && !($config instanceof \IniParser)) {
+            throw new \InvalidArgumentException("Configuration must be a \Zend_Config_Ini or \IniParser object.");
+        }
+        if (empty($rootPath)) {
             throw new \InvalidArgumentException('RootPath needs to be given');
         }
-        if (!is_string($module)) {
+        if (empty($module)) {
             throw new \InvalidArgumentException('Module name needs to be given');
         }
+
         $this->config     = $config;
         $this->rootPath   = $rootPath;
         $this->module     = $module;
