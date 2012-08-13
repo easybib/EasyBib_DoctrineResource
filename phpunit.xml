@@ -1,0 +1,5 @@
+<phpunit bootstrap="./tests/TestInit.php" colors="true">
+    <testsuite>
+        <file>./tests/EasyBib/Doctrine/Test/DoctrineResourceTestCase.php</file>
+    </testsuite>
+</phpunit>

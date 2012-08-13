@@ -61,6 +61,12 @@ use Gedmo\Tree\TreeListener;
 class DoctrineResource
 {
     /**
+     * Application dir: app or application
+     * @var string
+     */
+    protected $appDir = 'app';
+
+    /**
      * @var EntityManager
      */
     protected $em;
@@ -117,14 +123,21 @@ class DoctrineResource
             throw new \InvalidArgumentException('Module name needs to be given');
         }
 
-        $this->config     = $config;
-        $this->rootPath   = $rootPath;
-        $this->module     = $module;
-        $this->modulePath = $rootPath . '/app/modules/' . $module;
+        $this->config   = $config;
+        $this->rootPath = $rootPath;
+        $this->module   = $module;
 
         $this->setOptions($options);
+    }
 
-        $this->init();
+    /**
+     * Return options (DoctrineExtenions-related)
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**
@@ -268,7 +281,7 @@ class DoctrineResource
             $this->rootPath . '/library/Doctrine/Model'
         );
 
-        if (is_dir($this->modulePath . '/' . $this->config->modelFolder)) {
+        if (is_dir($this->getModulePath() . $this->config->modelFolder)) {
             $folders[] = $this->modulePath . '/' . $this->config->modelFolder;
         }
 
@@ -311,6 +324,39 @@ class DoctrineResource
      */
     public function getEntityManager()
     {
+        $this->init();
         return $this->em;
+    }
+
+    public function getModulePath()
+    {
+        if (null === $this->modulePath) {
+            $this->modulePath = sprintf(
+                '%s/%s/modules/%s/',
+                $this->rootPath, $this->appDir, $this->module
+            );
+        }
+        return $this->modulePath;
+    }
+
+    /**
+     * Set application dir.
+     *
+     * @param string $dir
+     *
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function setAppDir($dir)
+    {
+        static $allowed = array('app', 'application');
+        if (empty($dir)) {
+            throw new \InvalidArgumentException("Directory cannot be empty.");
+        }
+        if (!in_array($dir, $allowed)) {
+            throw new \InvalidArgumentException("Directory must be one of these two values: " . implode(', ', $allowed));
+        }
+        $this->appDir = $dir;
+        return $this;
     }
 }
