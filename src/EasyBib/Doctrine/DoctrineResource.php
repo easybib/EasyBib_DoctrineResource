@@ -113,8 +113,8 @@ class DoctrineResource
      */
     public function __construct($config, $rootPath, $module, array $options)
     {
-        if (!($config instanceof \Zend_Config_Ini) && !($config instanceof \IniParser)) {
-            throw new \InvalidArgumentException("Configuration must be a \Zend_Config_Ini or \IniParser object.");
+        if (!($config instanceof \Zend_Config_Ini) && !($config instanceof \ArrayObject)) {
+            throw new \InvalidArgumentException("Configuration must be a \Zend_Config_Ini or \IniParser object. Config was: " . \gettype($config));
         }
         if (empty($rootPath)) {
             throw new \InvalidArgumentException('RootPath needs to be given');

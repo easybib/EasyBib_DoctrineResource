@@ -18,7 +18,13 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
      */
     public function testModulePath($module, $appDir)
     {
-        $config = $this->getMock('\IniParser');
+        $configParser = $this->getMock('\IniParser', array('parse'));
+        $configParser->expects($this->once())
+            ->method('parse')
+            ->will($this->returnValue(new \ArrayObject()));
+
+        $config = $configParser->parse();
+
         $resource = new DoctrineResource($config, '__ROOT__PATH__', $module, array());
         $resource->setAppDir($appDir);
 
