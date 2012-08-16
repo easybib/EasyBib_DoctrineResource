@@ -39,6 +39,22 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
         $fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
         require_once $fixtureDir . '/library/Entity/PackageVersion.php';
 
+        $resource = new DoctrineResource($this->getConfigMock(), $fixtureDir, 'default', array());
+        $em       = $resource->getEntityManager();
+
+        $packageVersion = $em->getRepository('Entity\PackageVersion');
+        $this->assertInstanceOf('Doctrine\ORM\EntityRepository', $packageVersion);
+    }
+
+    /**
+     * It seems hard to currently test this code without providing it with what
+     * it wants/needs. So instead of setting up a complicated mock object with PHPUnit
+     * I did this, until we refactor the related code.
+     *
+     * @return \ArrayObject
+     */
+    protected function getConfigMock()
+    {
         $configArray = array(
             'autoGenerateProxyClasses' => 1,
             'proxy'                    => new \ArrayObject(array(
@@ -56,11 +72,6 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
                 'charset'  => "utf8",
             ), \ArrayObject::ARRAY_AS_PROPS),
         );
-
-        $resource = new DoctrineResource(new \ArrayObject($configArray, \ArrayObject::ARRAY_AS_PROPS), $fixtureDir, 'default', array());
-        $em       = $resource->getEntityManager();
-
-        $packageVersion = $em->getRepository('Entity\PackageVersion');
-        $this->assertInstanceOf('Doctrine\ORM\EntityRepository', $packageVersion);
+        return new \ArrayObject($configArray, \ArrayObject::ARRAY_AS_PROPS);
     }
 }
