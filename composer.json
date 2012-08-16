@@ -19,6 +19,10 @@
         {
             "type": "vcs",
             "url": "http://github.com/till/IniParser"
+        },
+        {
+            "type": "vcs",
+            "url": "http://github.com/easybib/zf1"
         }
     ],
     "require": {
@@ -27,7 +31,8 @@
         "gedmo/doctrine-extensions":"dev-master"
     },
     "require-dev": {
-        "till/iniparser": "dev-master"
+        "till/iniparser": "dev-master",
+        "easybib-core/zf1": "1.11.11.3"
     },
     "autoload": {
         "psr-0": {

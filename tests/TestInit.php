@@ -5,3 +5,5 @@ if (!file_exists($autoloader)) {
     exit(2);
 }
 require_once $autoloader;
+
+set_include_path(dirname(__DIR__) . '/vendor/easybib-core/zf1/library:' . get_include_path());
