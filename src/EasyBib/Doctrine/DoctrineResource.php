@@ -58,6 +58,8 @@ use Gedmo\Sluggable\SluggableListener;
 use Gedmo\Tree\TreeListener;
 //use DoctrineExtensions\Versionable\VersionListener;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+
 class DoctrineResource
 {
     /**
@@ -205,7 +207,8 @@ class DoctrineResource
         $proxyFolder  = $this->getProxyFolder();
         $driverImpl   = $config->newDefaultAnnotationDriver($modelFolders);
 
-        $annotationReader = new \Doctrine\Common\Annotations\AnnotationReader;
+        AnnotationReader::addGlobalIgnoredName('package_version');
+        $annotationReader = new AnnotationReader;
         $cachedAnnotationReader = new \Doctrine\Common\Annotations\CachedReader(
             $annotationReader, // use reader
             $cache // and a cache driver

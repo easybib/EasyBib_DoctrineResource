@@ -33,4 +33,34 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
             $resource->getModulePath()
         );
     }
+
+    public function testAnnotationPackageVersion()
+    {
+        $fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
+        require_once $fixtureDir . '/library/Entity/PackageVersion.php';
+
+        $configArray = array(
+            'autoGenerateProxyClasses' => 1,
+            'proxy'                    => new \ArrayObject(array(
+                'namespace' => "Proxy",
+                'folder'    => "library/Proxy",
+            ), \ArrayObject::ARRAY_AS_PROPS),
+            'modelFolder'              => "library/Entity",
+            'cacheImplementation'      => "Doctrine\Common\Cache\ArrayCache",
+            'connection'               => new \ArrayObject(array(
+                'driver'   => "mysqli",
+                'dbname'   => "mysql",
+                'user'     => "root",
+                'host'     => "127.0.0.1",
+                'password' => "",
+                'charset'  => "utf8",
+            ), \ArrayObject::ARRAY_AS_PROPS),
+        );
+
+        $resource = new DoctrineResource(new \ArrayObject($configArray, \ArrayObject::ARRAY_AS_PROPS), $fixtureDir, 'default', array());
+        $em       = $resource->getEntityManager();
+
+        $packageVersion = $em->getRepository('Entity\PackageVersion');
+        $this->assertInstanceOf('Doctrine\ORM\EntityRepository', $packageVersion);
+    }
 }
