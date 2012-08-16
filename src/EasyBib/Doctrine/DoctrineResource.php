@@ -228,8 +228,14 @@ class DoctrineResource
         $config->setProxyNamespace($this->config->proxy->namespace);
         $config->setAutoGenerateProxyClasses($this->config->autoGenerateProxyClasses);
 
+        if ($this->config instanceof \Zend_Config_Ini) {
+            $connectionConfig = $this->config->connection->toArray();
+        } else {
+            $connectionConfig = (array) $this->config->connection;
+        }
+
         $this->em = EntityManager::create(
-            $this->config->connection->toArray(),
+            $connectionConfig,
             $config,
             $this->evm
         );
