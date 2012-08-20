@@ -79,7 +79,8 @@ class DoctrineResource
     protected $evm;
 
     /**
-     * @var \Zend_Config_Ini
+     * Could be an instance of `\Zend_Config` or `\ArrayObject`
+     * @var mixed
      */
     protected $config;
 
@@ -115,8 +116,8 @@ class DoctrineResource
      */
     public function __construct($config, $rootPath, $module, array $options)
     {
-        if (!($config instanceof \Zend_Config_Ini) && !($config instanceof \ArrayObject)) {
-            throw new \InvalidArgumentException("Configuration must be a \Zend_Config_Ini or \IniParser object. Config was: " . \gettype($config));
+        if (!($config instanceof \Zend_Config) && !($config instanceof \ArrayObject)) {
+            throw new \InvalidArgumentException("Configuration must be a \Zend_Config or \IniParser object. Config was: " . \gettype($config));
         }
         if (empty($rootPath)) {
             throw new \InvalidArgumentException('RootPath needs to be given');
@@ -228,7 +229,7 @@ class DoctrineResource
         $config->setProxyNamespace($this->config->proxy->namespace);
         $config->setAutoGenerateProxyClasses($this->config->autoGenerateProxyClasses);
 
-        if ($this->config instanceof \Zend_Config_Ini) {
+        if ($this->config instanceof \Zend_Config) {
             $connectionConfig = $this->config->connection->toArray();
         } else {
             $connectionConfig = (array) $this->config->connection;
