@@ -29,22 +29,6 @@
  * @link     https://github.com/easybib/EasyBib_Form_Decorator
  */
 
-/**
- * EasyBib_DoctrineResource
- *
- * Setup Doctrine EntityManager and add support for some Gedmo PlugIns
- * - provides model support
- * - provides buildBootstrapErrorDecorators method
- *   for adding css error classes to form if not valid
- *
- * @category EasyBib
- * @package  Form
- * @author   Michael Scholl <michael@sch0ll.de>
- * @license  http://www.opensource.org/licenses/mit-license.html MIT License
- * @version  Release: @package_version@
- * @link     https://github.com/easybib/EasyBib_Form_Decorator
- */
-
 namespace EasyBib\Doctrine;
 
 use Doctrine\ORM\EntityManager;
@@ -60,6 +44,23 @@ use Gedmo\Tree\TreeListener;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 
+/**
+ * EasyBib_DoctrineResource
+ *
+ * Setup Doctrine EntityManager and add support for some Gedmo PlugIns
+ * - provides model support
+ * - provides buildBootstrapErrorDecorators method
+ *   for adding css error classes to form if not valid
+ *
+ * @category EasyBib
+ * @package  Form
+ * @author   Michael Scholl <michael@sch0ll.de>
+ * @author   Leander Damme <leander@wesrc.com>
+ * @author   Till Klampaeckel <till@php.net>
+ * @license  http://www.opensource.org/licenses/mit-license.html MIT License
+ * @version  Release: @package_version@
+ * @link     https://github.com/easybib/EasyBib_Form_Decorator
+ */
 class DoctrineResource
 {
     /**
