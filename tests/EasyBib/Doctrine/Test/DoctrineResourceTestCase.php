@@ -46,6 +46,16 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Doctrine\ORM\EntityRepository', $packageVersion);
     }
 
+    public function testGetEntityManager()
+    {
+        $fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
+        require_once $fixtureDir . '/library/Entity/PackageVersion.php';
+
+        $resource = new DoctrineResource($this->getConfigMock(), $fixtureDir, 'default', array());
+        $em       = $resource->getEntityManager();
+        $this->assertInstanceOf('Doctrine\ORM\EntityManager', $em);
+    }
+
     /**
      * It seems hard to currently test this code without providing it with what
      * it wants/needs. So instead of setting up a complicated mock object with PHPUnit
