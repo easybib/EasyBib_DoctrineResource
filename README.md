@@ -1,6 +1,8 @@
 EasyBib DoctrineResource
 ========================
 
+[![Build Status](https://secure.travis-ci.org/easybib/EasyBib_DoctrineResource.png?branch=master)](http://travis-ci.org/easybib/EasyBib_DoctrineResource)
+
 A wrapper for setting up the Doctrine EntityManager to use it in all modules of EasyBib.
 It assumes you're using a ZF MVC application with modules placed inside an "app" folder.
 
