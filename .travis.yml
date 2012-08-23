@@ -3,4 +3,4 @@ php:
   - 5.3
   - 5.4
 before_script:
-  - ./composer.phar -v install --dev
+  - ./composer.phar -v install
