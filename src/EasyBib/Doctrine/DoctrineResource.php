@@ -35,6 +35,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\ClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Persistence\PersistentObject;
 use Doctrine\ORM\Configuration;
 use Doctrine\DBAL\Logging\EchoSQLLogger;
 use Gedmo\Timestampable\TimestampableListener;
@@ -241,7 +242,7 @@ class DoctrineResource
             $config,
             $this->evm
         );
-        \Zend_Registry::set('em', $this->em);
+        PersistentObject::setObjectManager($this->em);
         return;
     }
 
