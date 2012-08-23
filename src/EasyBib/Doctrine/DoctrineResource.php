@@ -242,7 +242,6 @@ class DoctrineResource
             $config,
             $this->evm
         );
-        \Zend_Registry::set('em', $this->em);
         PersistentObject::setObjectManager($this->em);
         return;
     }
