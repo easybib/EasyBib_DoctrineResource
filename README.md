@@ -9,7 +9,6 @@ Installation & Configuration
  1. Use composer to add EasyBib_DoctrineResource as dependency
  2. Drop in a doctrine.ini into your config folder - see docs folder for an example
  3. Use it!
- 
 
 Usage
 -----
@@ -26,19 +25,15 @@ Usage
  3. Initialize DoctrineResource by:
  
         $doctrineResource =  new \EasyBib\Doctrine\DoctrineResource(				 			
-          $doctrineIniConfig, // your doctrine.ini settings
-       	  $root,              // path to your app root folder
-          'default',          // zf mvc module name you want to use the DoctrineResource from
-       	  $options            // the options array for loading needed PlugIns 
+            $doctrineIniConfig, // your doctrine.ini settings
+       	    $root,              // path to your app root folder
+            'default',          // zf mvc module name you want to use the DoctrineResource from
+       	    $options            // the options array for loading needed PlugIns, can be an empty array()
        	 );
+
  4. Use the Doctrine EntityManager: 
          
-        $em = $doctrineResource->getEntityManager(); 
+        $em = $doctrineResource->getEntityManager();
         
-       _or_
-              
-        $em = \Zend_Registry::get('em'); 
-        
-      (its getting registered by DoctrineResource)
  5. Have fun with Doctrine!
       
