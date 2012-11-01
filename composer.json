@@ -36,7 +36,8 @@
     },
     "autoload": {
         "psr-0": {
-            "EasyBib\\Doctrine\\DoctrineResource": "src"
+            "EasyBib\\Doctrine\\DoctrineResource": "src",
+            "EasyBib\\Doctrine\\MysqlBibPlatform": "src"
         }
     }
 }

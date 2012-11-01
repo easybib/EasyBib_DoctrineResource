@@ -112,7 +112,7 @@ class DoctrineResource
      * @param object $config
      * @param string $rootPath
      * @param string $module
-     * @param array  $options  (array with keys for timestampable,sluggable,tree)
+     * @param array  $options  (array with keys for timestampable,sluggable,tree, platform)
      *
      * @return $this
      */
@@ -158,7 +158,8 @@ class DoctrineResource
             'timestampable' => false,
             'sluggable'     => false,
             'tree'          => false,
-            'profile'       => false
+            'profile'       => false,
+            'bibplatform'   => false,
         );
 
         if (count($options) > 0) {
@@ -237,11 +238,16 @@ class DoctrineResource
             $connectionConfig = (array) $this->config->connection;
         }
 
+        if (true === $this->options['bibplatform']) {
+            $connectionConfig['platform'] = new MysqlBibPlatform();
+        }
+
         $this->em = EntityManager::create(
             $connectionConfig,
             $config,
             $this->evm
         );
+
         PersistentObject::setObjectManager($this->em);
         return;
     }
