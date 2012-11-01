@@ -19,13 +19,13 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  *
- * PHP Version 5
+ * PHP Version 5.3
  *
- * @category EasyBib
- * @package  DoctrineResource
+ * @category Database
+ * @package  EasyBib\Doctrine
  * @author   Michael Scholl <michael@sch0ll.de>
  * @license  http://www.opensource.org/licenses/mit-license.html MIT License
- * @version  git: $id$
+ * @version  GIT: <git_id>
  * @link     https://github.com/easybib/EasyBib_Form_Decorator
  */
 
@@ -46,15 +46,15 @@ use Gedmo\Tree\TreeListener;
 use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
- * EasyBib_DoctrineResource
+ * EasyBib\Doctrine\DoctrineResource
  *
  * Setup Doctrine EntityManager and add support for some Gedmo PlugIns
  * - provides model support
  * - provides buildBootstrapErrorDecorators method
  *   for adding css error classes to form if not valid
  *
- * @category EasyBib
- * @package  Form
+ * @category Database
+ * @package  EasyBib\Doctrine
  * @author   Michael Scholl <michael@sch0ll.de>
  * @author   Leander Damme <leander@wesrc.com>
  * @author   Till Klampaeckel <till@php.net>
