@@ -5,6 +5,17 @@ use EasyBib\Doctrine\DoctrineResource;
 
 class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
+    protected $fixtureDir;
+
+    public function setUp()
+    {
+        $this->fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
+        require_once $this->fixtureDir . '/library/Entity/PackageVersion.php';
+    }
+
     public static function modulePathProvider()
     {
         return array(
@@ -36,10 +47,7 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
 
     public function testAnnotationPackageVersion()
     {
-        $fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
-        require_once $fixtureDir . '/library/Entity/PackageVersion.php';
-
-        $resource = new DoctrineResource($this->getConfigMock(), $fixtureDir, 'default', array());
+        $resource = new DoctrineResource($this->getConfigMock(), $this->fixtureDir, 'default', array());
         $em       = $resource->getEntityManager();
 
         $packageVersion = $em->getRepository('Entity\PackageVersion');
@@ -48,12 +56,24 @@ class DoctrineResourceTestCase extends \PHPUnit_Framework_TestCase
 
     public function testGetEntityManager()
     {
-        $fixtureDir = dirname(dirname(dirname(__DIR__))) . '/fixtures';
-        require_once $fixtureDir . '/library/Entity/PackageVersion.php';
-
-        $resource = new DoctrineResource($this->getConfigMock(), $fixtureDir, 'default', array());
+        $resource = new DoctrineResource($this->getConfigMock(), $this->fixtureDir, 'default', array());
         $em       = $resource->getEntityManager();
         $this->assertInstanceOf('Doctrine\ORM\EntityManager', $em);
+    }
+
+    public function testPlatform()
+    {
+        $resource = new DoctrineResource(
+            $this->getConfigMock(),
+            $this->fixtureDir,
+            'default',
+            array('bibplatform' => true)
+        );
+        $em = $resource->getEntityManager();
+
+        $platform = $em->getConnection()->getDatabasePlatform();
+        $this->assertInstanceOf('EasyBib\Doctrine\MysqlBibPlatform', $platform);
+        $this->assertFalse($platform->supportsForeignKeyConstraints());
     }
 
     /**
