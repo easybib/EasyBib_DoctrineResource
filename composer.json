@@ -28,7 +28,7 @@
     "require": {
         "php": ">=5.3.0",
         "doctrine/orm":"=2.2.2",
-        "gedmo/doctrine-extensions":"dev-master"
+        "gedmo/doctrine-extensions":"2.3.2"
     },
     "require-dev": {
         "till/iniparser": "dev-master",
