@@ -206,9 +206,9 @@ class DoctrineResource
         }
 
         $cache        = new $this->config->cacheImplementation();
-        $modelFolders = $this->getEntityFolders();
+        $entityFolders = $this->getEntityFolders();
         $proxyFolder  = $this->getProxyFolder();
-        $driverImpl   = $config->newDefaultAnnotationDriver($modelFolders);
+        $driverImpl   = $config->newDefaultAnnotationDriver($entityFolders);
 
         AnnotationReader::addGlobalIgnoredName('package_version');
         $annotationReader = new AnnotationReader;
@@ -219,7 +219,7 @@ class DoctrineResource
 
         $annotationDriver = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver(
             $cachedAnnotationReader, // our cached annotation reader
-            array($modelFolders) // paths to look in
+            $entityFolders // paths to look in
         );
 
         $this->registerAutoloadNamespaces();
@@ -289,10 +289,19 @@ class DoctrineResource
      */
     protected function getEntityFolders()
     {
-        $folders = array(
-            $this->rootPath . '/library/Doctrine/Model'
-        );
+        $folders = array();
 
+        //only set default entity dir if it really exists
+        if (is_dir($this->rootPath . '/library/Doctrine/Model')) {
+            $folders[] = $this->rootPath . '/library/Doctrine/Model';
+        }
+
+        //set configured entity-dir if run in module-standalone context
+        if (is_dir($this->rootPath . '/' . $this->config->modelFolder)) {
+            $folders[] = $this->rootPath . '/' . $this->config->modelFolder;
+        }
+
+        //set configured entity-dir if run in module context
         if (is_dir($this->getModulePath() . $this->config->modelFolder)) {
             $folders[] = $this->modulePath . '/' . $this->config->modelFolder;
         }
