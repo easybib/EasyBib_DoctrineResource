@@ -3,4 +3,4 @@ php:
   - 5.3
   - 5.4
 before_script:
-  - composer install --non-interactive --verbose
+  - composer install --no-interaction --verbose
