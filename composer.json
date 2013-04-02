@@ -31,7 +31,7 @@
         "gedmo/doctrine-extensions":"2.3.*"
     },
     "require-dev": {
-        "till/iniparser": "dev-master",
+        "till/iniparser": ">=0.5.0",
         "easybib-core/zf1": "1.11.11.3"
     },
     "autoload": {
