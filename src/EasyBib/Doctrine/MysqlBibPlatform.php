@@ -30,7 +30,7 @@
  */
 namespace EasyBib\Doctrine;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 
 /**
  * EasyBib\Doctrine\MysqlBiBPlatform
@@ -44,7 +44,7 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
  * @version  GIT: <git_id>
  * @link     https://github.com/easybib/EasyBib_DoctrineResource
  */
-class MysqlBibPlatform extends MySQLPlatform
+class MysqlBibPlatform extends MySqlPlatform
 {
     /**
      * Disable foreign keys.
