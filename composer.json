@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "till/iniparser": ">=0.5.0",
-        "easybib-core/zf1": "1.11.11.3",
+        "easybib-core/zf1": "1.*",
         "doctrine/data-fixtures": "1.0.*@dev"
     },
     "autoload": {
