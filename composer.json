@@ -27,13 +27,14 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "doctrine/orm":"2.3.*",
-        "gedmo/doctrine-extensions":"2.3.*"
+        "doctrine/orm":"2.3.*||2.4.*||2.5.*",
+        "gedmo/doctrine-extensions":"2.3.*||2.4.*"
     },
     "require-dev": {
         "till/iniparser": ">=0.5.0",
         "easybib-core/zf1": "1.*",
-        "doctrine/data-fixtures": "1.0.*@dev"
+        "doctrine/data-fixtures": "1.0.*@dev",
+        "phpunit/phpunit": "^5.2.4"
     },
     "autoload": {
         "psr-0": {
