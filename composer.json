@@ -1,6 +1,7 @@
 {
     "name": "easybib/DoctrineResource",
     "description": "EasyBib Doctrine Resource",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Till Klampaeckel",
