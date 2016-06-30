@@ -293,18 +293,15 @@ class DoctrineResource
     }
 
     /**
-     * Get Proxy folders
+     * Get Proxy folder
      *
      * @return string
      */
     protected function getProxyFolder()
     {
-        /*$folders = array(
-            $this->rootPath . '/library/Doctrine/Proxy'
-        );
-        if (is_dir($this->modulePath . '/' . $this->config->proxy->folder)) {
-            $folders[] = $this->modulePath . '/' . $this->config->proxy->folder;
-        }*/
+        if (is_dir($this->rootPath . '/' . $this->config->proxy->folder)) {
+            return $this->rootPath . '/' . $this->config->proxy->folder;
+        }
         return $this->rootPath . '/library/Doctrine/Proxy';
     }
 
